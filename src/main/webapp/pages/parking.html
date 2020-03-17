@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>物业管理系统 - 车位管理</title>
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/layui256/css/layui.css">
+</head>
+<body class="layui-layout-body" onload="loadParking()">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header"></div>
+
+    <div class="layui-side layui-bg-black"></div>
+
+    <div class="layui-body">
+        <div class="body-title">车位信息管理</div>
+        <div class="body-container">
+            <table class="layui-hide" id="parking" lay-filter="parking"></table>
+            <script type="text/html" id="parking-toolbar">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-event="add">添加</button>
+                <input type="text" name="parkOwner" class="layui-input" placeholder="业主姓名" title="">
+                <button class="layui-btn layui-btn-radius" lay-event="search">搜索</button>
+            </script>
+            <script type="text/html" id="parking-tool">
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+            <div id="parking-page"></div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        © 物业管理系统
+    </div>
+</div>
+
+<div id="add-parking">
+    <div class="layout-background display-none" onclick="hideLayout($('#add-parking'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">注册车位信息</span>
+                <span class="layout-close" onclick="hideLayout($('#add-parking'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">车位号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="parkNo" class="layui-input" title="" lay-verify="required"
+                               placeholder="例：45" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">车牌照</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="parkCarNo" class="layui-input" title="" lay-verify="required"
+                               placeholder="例：京AA0001" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">业主身份证号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="parkOwner" class="layui-input" title="" lay-verify="required"
+                               placeholder="例：370305199602213545" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">操作员编号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="parkOperator" class="layui-input" title="" lay-verify="required"
+                               readonly="readonly" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="parkComment" class="layui-input" title="" placeholder="若无可忽略不填!"
+                               autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="add">注册</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#add-parking'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/layui256/layui.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/parking.js"></script>
+</footer>
+</body>
+</html>

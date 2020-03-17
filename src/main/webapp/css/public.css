@@ -1,0 +1,158 @@
+* {
+    font-family: "Microsoft YaHei UI", "JetBrains Mono", Consolas, serif;
+}
+
+.display-none {
+    display: none;
+}
+
+.layui-side img {
+    margin: -2px 0 0 0;
+}
+
+.body-title {
+    padding: 15px;
+    border-bottom: 1px solid #F2F2F2;
+    font-weight: bold;
+}
+
+.body-container {
+    padding: 0 20px;
+}
+
+.body-container .layui-input {
+    width: 200px;
+    border-radius: 19px;
+    display: inline-block;
+}
+
+/* --- 自定义模态框 --- */
+
+.layout-background {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    opacity: 0;
+    z-index: 1000;
+    transition: all .5s;
+}
+
+.background-fixed {
+    opacity: .5;
+    transition: all .5s;
+}
+
+.layout-box {
+    width: 500px;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*margin: 0 0 0 -250px;*/
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px #6b6b6b;
+    opacity: 0;
+    z-index: 1000;
+    transition: all .5s;
+}
+
+.box-fixed {
+    top: 35%;
+    opacity: 1;
+    transition: all .5s;
+}
+
+.layout-header {
+    padding: 15px;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.layout-title {
+    font-weight: bold;
+}
+
+.layout-close {
+    float: right;
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 18px;
+    transform: rotate(45deg);
+    background: #000000;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.layout-container {
+    padding: 10px 15px;
+}
+
+.layout-container .layui-input {
+    border-radius: 19px;
+}
+
+.layout-container .layui-form-label {
+    width: 90px;
+}
+
+.layout-container .layui-input-block {
+    margin-left: 120px;
+}
+
+.layout-footer {
+    padding: 5px 0;
+    text-align: center;
+    border-top: 1px solid #F2F2F2;
+}
+
+/* --- --- */
+
+/* --- 自定义下拉框样式 --- */
+
+.ul-select {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 80px;
+    padding: 5px 0;
+    z-index: 899;
+    min-width: 100%;
+    border: 1px solid #d2d2d2;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.12);
+    box-sizing: border-box;
+}
+
+.ul-select dd {
+    padding: 0 10px;
+    line-height: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.ul-select dd:hover {
+    background-color: #5FB878;
+    color: #fff;
+}
+
+.layui-form-select .layui-edge {
+    top: 75%;
+}
+
+.layui-form-select dl {
+    top: 80px;
+}
+
+/* --- --- */

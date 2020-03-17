@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="online.yang.cloud.mapper.NoticeMapper">
+    <resultMap id="BaseResultMap" type="online.yang.cloud.model.Notice">
+        <id column="notice_id" jdbcType="VARCHAR" property="noticeId"/>
+        <result column="notice_content" jdbcType="VARCHAR" property="noticeContent"/>
+        <result column="notice_date" jdbcType="TIMESTAMP" property="noticeDate"/>
+        <result column="notice_creater" jdbcType="VARCHAR" property="noticeCreater"/>
+        <result column="notice_creater_no" jdbcType="VARCHAR" property="noticeCreaterNo"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        notice_id, notice_content, notice_date, notice_creater, notice_creater_no
+    </sql>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from notice
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from notice
+        limit #{page}, #{limit}
+    </select>
+    <select id="selectLastNotice" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from notice
+        order by notice_date desc
+        limit 0, 1
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from notice
+        where notice_id = #{noticeId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from notice
+        where notice_id = #{noticeId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="online.yang.cloud.model.Notice">
+        insert into notice (notice_id, notice_content, notice_date,
+          notice_creater)
+        values (#{noticeId,jdbcType=VARCHAR}, #{noticeContent,jdbcType=VARCHAR}, #{noticeDate,jdbcType=TIMESTAMP},
+          #{noticeCreater,jdbcType=VARCHAR}, #{noticeCreaterNo,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="online.yang.cloud.model.Notice">
+        insert into notice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="noticeId != null">
+                notice_id,
+            </if>
+            <if test="noticeContent != null">
+                notice_content,
+            </if>
+            <if test="noticeDate != null">
+                notice_date,
+            </if>
+            <if test="noticeCreater != null">
+                notice_creater,
+            </if>
+            <if test="noticeCreaterNo != null">
+                notice_creater_no,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="noticeId != null">
+                #{noticeId,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeContent != null">
+                #{noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeDate != null">
+                #{noticeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="noticeCreater != null">
+                #{noticeCreater,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeCreaterNo != null">
+                #{noticeCreaterNo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.Notice">
+        update notice
+        <set>
+            <if test="noticeContent != null">
+                notice_content = #{noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeDate != null">
+                notice_date = #{noticeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="noticeCreater != null">
+                notice_creater = #{noticeCreater,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeCreaterNo != null">
+                notice_creater_no = #{noticeCreaterNo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where notice_id = #{noticeId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.Notice">
+        update notice
+        set notice_content = #{noticeContent,jdbcType=VARCHAR},
+          notice_date = #{noticeDate,jdbcType=TIMESTAMP},
+          notice_creater = #{noticeCreater,jdbcType=VARCHAR},
+          notice_creater_no = #{noticeCreaterNo,jdbcType=VARCHAR}
+        where notice_id = #{noticeId,jdbcType=VARCHAR}
+    </update>
+</mapper>

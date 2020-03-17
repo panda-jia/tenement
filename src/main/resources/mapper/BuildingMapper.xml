@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.yang.cloud.mapper.BuildingMapper">
+    <resultMap id="BaseResultMap" type="online.yang.cloud.model.Building">
+        <id column="build_id" property="buildId" jdbcType="VARCHAR"/>
+        <result column="build_name" property="buildName" jdbcType="VARCHAR"/>
+        <result column="build_layer_count" property="buildLayerCount" jdbcType="INTEGER"/>
+        <result column="build_room_count" property="buildRoomCount" jdbcType="INTEGER"/>
+        <result column="build_date" property="buildDate" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        build_id, build_name, build_layer_count, build_room_count, build_date
+    </sql>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from building
+        <trim prefix="where" suffixOverrides="and">
+            <if test="buildName != null">
+                build_name like concat('%', #{buildName,jdbcType=VARCHAR}, '%')
+            </if>
+        </trim>
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from building
+        <trim prefix="where" suffixOverrides="and">
+            <if test="buildName != null">
+                build_name like concat('%', #{buildName,jdbcType=VARCHAR}, '%')
+            </if>
+        </trim>
+        limit #{page}, #{limit}
+    </select>
+    <select id="findAllByNoPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from building
+    </select>
+    <select id="findByBuildName" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from building
+        where build_name = #{buildName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from building
+        where build_id = #{buildId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from building
+        where build_id = #{buildId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="online.yang.cloud.model.Building">
+        insert into building (build_id, build_name, build_layer_count,
+          build_room_count, build_date)
+        values (#{buildId,jdbcType=VARCHAR}, #{buildName,jdbcType=VARCHAR}, #{buildLayerCount,jdbcType=INTEGER},
+          #{buildRoomCount,jdbcType=INTEGER}, #{buildDate,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="online.yang.cloud.model.Building">
+        insert into building
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buildId != null">
+                build_id,
+            </if>
+            <if test="buildName != null">
+                build_name,
+            </if>
+            <if test="buildLayerCount != null">
+                build_layer_count,
+            </if>
+            <if test="buildRoomCount != null">
+                build_room_count,
+            </if>
+            <if test="buildDate != null">
+                build_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buildId != null">
+                #{buildId,jdbcType=VARCHAR},
+            </if>
+            <if test="buildName != null">
+                #{buildName,jdbcType=VARCHAR},
+            </if>
+            <if test="buildLayerCount != null">
+                #{buildLayerCount,jdbcType=INTEGER},
+            </if>
+            <if test="buildRoomCount != null">
+                #{buildRoomCount,jdbcType=INTEGER},
+            </if>
+            <if test="buildDate != null">
+                #{buildDate,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.Building">
+        update building
+        <set>
+            <if test="buildName != null">
+                build_name = #{buildName,jdbcType=VARCHAR},
+            </if>
+            <if test="buildLayerCount != null">
+                build_layer_count = #{buildLayerCount,jdbcType=INTEGER},
+            </if>
+            <if test="buildRoomCount != null">
+                build_room_count = #{buildRoomCount,jdbcType=INTEGER},
+            </if>
+            <if test="buildDate != null">
+                build_date = #{buildDate,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where build_id = #{buildId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.Building">
+        update building
+        set build_name = #{buildName,jdbcType=VARCHAR},
+          build_layer_count = #{buildLayerCount,jdbcType=INTEGER},
+          build_room_count = #{buildRoomCount,jdbcType=INTEGER},
+          build_date = #{buildDate,jdbcType=VARCHAR}
+        where build_id = #{buildId,jdbcType=VARCHAR}
+    </update>
+</mapper>

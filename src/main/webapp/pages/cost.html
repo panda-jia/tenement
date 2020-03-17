@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>物业管理系统 - 费用管理</title>
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/layui256/css/layui.css">
+</head>
+<body class="layui-layout-body" onload="loadCost()">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header"></div>
+
+    <div class="layui-side layui-bg-black"></div>
+
+    <div class="layui-body">
+        <div class="body-title">费用管理</div>
+        <div class="body-container">
+            <table class="layui-hide" id="cost" lay-filter="cost"></table>
+            <script type="text/html" id="cost-toolbar">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-event="add">添加</button>
+                <input type="text" name="costOwner" class="layui-input" placeholder="业主姓名" title="">
+                <button class="layui-btn layui-btn-radius" lay-event="search">搜索</button>
+            </script>
+            <script type="text/html" id="cost-tool">
+                <a class="layui-btn layui-btn-xs" lay-event="finish">已缴费</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+            <div id="cost-page"></div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        © 物业管理系统
+    </div>
+</div>
+
+<div id="add-cost">
+    <div class="layout-background display-none" onclick="hideLayout($('#add-cost'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">添加缴费信息</span>
+                <span class="layout-close" onclick="hideLayout($('#add-cost'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">缴费类型</label>
+                    <div class="layui-input-block">
+                        <select name="costType" title="" lay-verify="required">
+                            <option value="0">水费</option>
+                            <option value="1">电费</option>
+                            <option value="2">煤气费</option>
+                            <option value="3">燃气费</option>
+                            <option value="4">网费</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">计费开始时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="costStart" class="layui-input costStart" title="" placeholder="年-月-日"
+                               lay-verify="required" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">计费结束时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="costEnd" class="layui-input costEnd" title="" placeholder="年-月-日"
+                               lay-verify="required" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">缴费总计</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="costSum" class="layui-input" title="" placeholder="单位：元"
+                               lay-verify="required" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">缴费人身份证号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="costOwnerNo" class="layui-input" title="" placeholder="缴费人身份证号"
+                               lay-verify="required" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="add">添加</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#add-cost'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/layui256/layui.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/cost.js"></script>
+</footer>
+</body>
+</html>

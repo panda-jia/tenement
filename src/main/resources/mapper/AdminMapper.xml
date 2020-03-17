@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.yang.cloud.mapper.AdminMapper">
+    <resultMap id="BaseResultMap" type="online.yang.cloud.model.Admin">
+        <id column="admin_id" property="adminId" jdbcType="VARCHAR"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        admin_id, account, password
+    </sql>
+    <select id="selectByAccountAndPwd" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from admin
+        where account = #{account}
+        and password = #{password}
+    </select>
+    <select id="selectByCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from admin
+        <trim prefix="where" suffixOverrides="and">
+            <if test="adminId != null">
+                admin_id = #{adminId,jdbcType=VARCHAR} and
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR} and
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR} and
+            </if>
+        </trim>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from admin
+        where admin_id = #{adminId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from admin
+        where admin_id = #{adminId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="online.yang.cloud.model.Admin">
+        insert into admin (admin_id, account, password
+          )
+        values (#{adminId,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+          )
+    </insert>
+    <insert id="insertSelective" parameterType="online.yang.cloud.model.Admin">
+        insert into admin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="adminId != null">
+                admin_id,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="adminId != null">
+                #{adminId,jdbcType=VARCHAR},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.Admin">
+        update admin
+        <set>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where admin_id = #{adminId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.Admin">
+        update admin
+        set account = #{account,jdbcType=VARCHAR},
+          password = #{password,jdbcType=VARCHAR}
+        where admin_id = #{adminId,jdbcType=VARCHAR}
+    </update>
+</mapper>

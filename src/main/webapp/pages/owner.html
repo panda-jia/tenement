@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>物业管理系统 - 业主管理</title>
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/layui256/css/layui.css">
+</head>
+<body class="layui-layout-body" onload="loadOwner()">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header"></div>
+
+    <div class="layui-side layui-bg-black"></div>
+
+    <div class="layui-body">
+        <div class="body-title">业主管理</div>
+        <div class="body-container">
+            <table class="layui-hide" id="owner" lay-filter="owner"></table>
+            <script type="text/html" id="owner-toolbar">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-event="add">添加</button>
+                <input type="text" name="ownerNo" class="layui-input" placeholder="身份证号" title="">
+                <input type="text" name="ownerName" class="layui-input" placeholder="姓名" title="">
+                <button class="layui-btn layui-btn-radius" lay-event="search">搜索</button>
+            </script>
+            <script type="text/html" id="owner-tool">
+                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+            <div id="owner-page"></div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        © 物业管理系统
+    </div>
+</div>
+<div id="add-owner">
+    <div class="layout-background display-none" onclick="hideLayout($('#add-owner'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">添加业主信息</span>
+                <span class="layout-close" onclick="hideLayout($('#add-owner'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">身份证号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerNo" class="layui-input" placeholder="身份证号" title=""
+                               required lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerName" class="layui-input" placeholder="姓名" title=""
+                               required lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">性别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="ownerGender" value="0" title="男" checked>
+                        <input type="radio" name="ownerGender" value="1" title="女">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">出生日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerBorth" class="layui-input ownerBorth" title=""
+                               required lay-verify="required" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">工作单位</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerWorkstation" class="layui-input" placeholder="工作单位" title=""
+                               required lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerPhone" class="layui-input" placeholder="联系电话" title=""
+                               required lay-verify="required">
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="add">添加</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#add-owner'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="edit-owner">
+    <div class="layout-background display-none" onclick="hideLayout($('#edit-owner'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">业主【<span></span>】信息</span>
+                <span class="layout-close" onclick="hideLayout($('#edit-owner'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item display-none">
+                    <label class="layui-form-label">id</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerId" class="layui-input" title="" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">身份证号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerNo" class="layui-input" placeholder="身份证号" title=""
+                               required lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerName" class="layui-input" placeholder="姓名" title=""
+                               required lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">性别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="ownerGender" value="0" title="男">
+                        <input type="radio" name="ownerGender" value="1" title="女">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">出生日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerBorth" class="layui-input ownerBorth" title=""
+                               required lay-verify="required" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">工作单位</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerWorkstation" class="layui-input" placeholder="工作单位" title=""
+                               required lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ownerPhone" class="layui-input" placeholder="联系电话" title=""
+                               required lay-verify="required">
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="edit">修改</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#edit-owner'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+<footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/layui256/layui.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/owner.js"></script>
+</footer>
+</body>
+</html>

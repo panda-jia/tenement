@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>物业管理系统 - 投诉管理</title>
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/layui256/css/layui.css">
+</head>
+<body class="layui-layout-body" onload="loadComplain()">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header"></div>
+
+    <div class="layui-side layui-bg-black"></div>
+
+    <div class="layui-body">
+        <div class="body-title">投诉信息管理</div>
+        <div class="body-container">
+            <table class="layui-hide" id="complain" lay-filter="complain"></table>
+            <script type="text/html" id="complain-toolbar">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-event="add">添加</button>
+            </script>
+            <script type="text/html" id="complain-tool">
+                <a class="layui-btn layui-btn-xs" lay-event="finish">处理完毕</a>
+            </script>
+            <div id="complain-page"></div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        © 物业管理系统
+    </div>
+</div>
+
+<div id="add-complain">
+    <div class="layout-background display-none" onclick="hideLayout($('#add-complain'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">添加投诉信息</span>
+                <span class="layout-close" onclick="hideLayout($('#add-complain'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">投诉标题</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="complainTitle" class="layui-input" title="" lay-verify="required"
+                               placeholder="例：环境打扫不及时">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">投诉内容</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="complainContent" class="layui-input" title="" lay-verify="required"
+                               placeholder="例：环境打扫不及时">
+                    </div>
+                </div>
+                <div class="layui-form-item display-none">
+                    <label class="layui-form-label">被投诉人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="complainAdminer" class="layui-input" title="" lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item display-none">
+                    <label class="layui-form-label">被投诉人编号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="complainNo" class="layui-input" title="" lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="complainComment" class="layui-input" title=""
+                               placeholder="如果没有请忽略。">
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="add">添加</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#add-complain'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/layui256/layui.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/complain.js"></script>
+</footer>
+</body>
+</html>

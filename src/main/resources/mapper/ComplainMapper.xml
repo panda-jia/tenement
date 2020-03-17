@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.yang.cloud.mapper.ComplainMapper" >
+    <resultMap id="BaseResultMap" type="online.yang.cloud.model.Complain" >
+        <id column="complain_id" property="complainId" jdbcType="VARCHAR" />
+        <result column="complain_title" property="complainTitle" jdbcType="VARCHAR" />
+        <result column="complain_content" property="complainContent" jdbcType="VARCHAR" />
+        <result column="complain_date" property="complainDate" jdbcType="TIMESTAMP" />
+        <result column="complain_adminer" property="complainAdminer" jdbcType="VARCHAR" />
+        <result column="complain_no" property="complainNo" jdbcType="VARCHAR" />
+        <result column="complain_status" property="complainStatus" jdbcType="VARCHAR" />
+        <result column="complain_comment" property="complainComment" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        complain_id, complain_title, complain_content, complain_date, complain_adminer, complain_no,
+        complain_status, complain_comment
+    </sql>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from complain
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from complain
+        limit #{page}, #{limit}
+    </select>
+    <select id="findLastTwo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from complain
+        order by complain_date desc
+        limit 0, 2
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from complain
+        where complain_id = #{complainId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from complain
+        where complain_id = #{complainId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="online.yang.cloud.model.Complain" >
+        insert into complain (complain_id, complain_title, complain_content,
+          complain_date, complain_adminer, complain_no,
+          complain_status, complain_comment)
+        values (#{complainId,jdbcType=VARCHAR}, #{complainTitle,jdbcType=VARCHAR}, #{complainContent,jdbcType=VARCHAR},
+          #{complainDate,jdbcType=TIMESTAMP}, #{complainAdminer,jdbcType=VARCHAR}, #{complainNo,jdbcType=VARCHAR},
+          #{complainStatus,jdbcType=VARCHAR}, #{complainComment,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="online.yang.cloud.model.Complain" >
+        insert into complain
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="complainId != null" >
+                complain_id,
+            </if>
+            <if test="complainTitle != null" >
+                complain_title,
+            </if>
+            <if test="complainContent != null" >
+                complain_content,
+            </if>
+            <if test="complainDate != null" >
+                complain_date,
+            </if>
+            <if test="complainAdminer != null" >
+                complain_adminer,
+            </if>
+            <if test="complainNo != null" >
+                complain_no,
+            </if>
+            <if test="complainStatus != null" >
+                complain_status,
+            </if>
+            <if test="complainComment != null" >
+                complain_comment,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="complainId != null" >
+                #{complainId,jdbcType=VARCHAR},
+            </if>
+            <if test="complainTitle != null" >
+                #{complainTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="complainContent != null" >
+                #{complainContent,jdbcType=VARCHAR},
+            </if>
+            <if test="complainDate != null" >
+                #{complainDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="complainAdminer != null" >
+                #{complainAdminer,jdbcType=VARCHAR},
+            </if>
+            <if test="complainNo != null" >
+                #{complainNo,jdbcType=VARCHAR},
+            </if>
+            <if test="complainStatus != null" >
+                #{complainStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="complainComment != null" >
+                #{complainComment,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.Complain" >
+        update complain
+        <set >
+            <if test="complainTitle != null" >
+                complain_title = #{complainTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="complainContent != null" >
+                complain_content = #{complainContent,jdbcType=VARCHAR},
+            </if>
+            <if test="complainDate != null" >
+                complain_date = #{complainDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="complainAdminer != null" >
+                complain_adminer = #{complainAdminer,jdbcType=VARCHAR},
+            </if>
+            <if test="complainNo != null" >
+                complain_no = #{complainNo,jdbcType=VARCHAR},
+            </if>
+            <if test="complainStatus != null" >
+                complain_status = #{complainStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="complainComment != null" >
+                complain_comment = #{complainComment,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where complain_id = #{complainId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.Complain" >
+        update complain
+        set complain_title = #{complainTitle,jdbcType=VARCHAR},
+          complain_content = #{complainContent,jdbcType=VARCHAR},
+          complain_date = #{complainDate,jdbcType=TIMESTAMP},
+          complain_adminer = #{complainAdminer,jdbcType=VARCHAR},
+          complain_no = #{complainNo,jdbcType=VARCHAR},
+          complain_status = #{complainStatus,jdbcType=VARCHAR},
+          complain_comment = #{complainComment,jdbcType=VARCHAR}
+        where complain_id = #{complainId,jdbcType=VARCHAR}
+    </update>
+</mapper>

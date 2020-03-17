@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>物业管理系统 - 物业管理员管理</title>
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/layui256/css/layui.css">
+</head>
+<body class="layui-layout-body" onload="loadManager()">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">物业管理系统</div>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:void(0);">
+                    <img src="/img/logo.jpg" class="layui-nav-img" alt="">
+                    <span title="a8d027cd88774d948d4358ebc1c62083">admin</span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:void(0)" onclick="urlArray.adminChange()">修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:void(0)" onclick="urlArray.adminLogout()">退出登录</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item">
+                    <a href="javascript:void(0);">
+                        <img src="/img/circle-o.png" alt="circle">
+                        物业管理员信息管理
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <div class="body-title">物业管理员信息管理</div>
+        <div class="body-container">
+            <table class="layui-hide" id="manager" lay-filter="manager"></table>
+            <script type="text/html" id="manager-toolbar">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-event="add">添加</button>
+                <input type="text" name="empName" class="layui-input" placeholder="管理员姓名" title="">
+                <button class="layui-btn layui-btn-radius" lay-event="search">搜索</button>
+            </script>
+            <script type="text/html" id="manager-tool">
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="del">删除</a>
+            </script>
+            <div id="manager-page"></div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        © 物业管理系统
+    </div>
+</div>
+
+<div id="add-manager">
+    <div class="layout-background display-none" onclick="hideLayout($('#add-manager'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">添加物业管理员信息</span>
+                <span class="layout-close" onclick="hideLayout($('#add-manager'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">管理员姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="empName" class="layui-input" title="" lay-verify="required"
+                               placeholder="例：张三" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选择框</label>
+                    <div class="layui-input-block">
+                        <select name="empGender" lay-verify="required" title="">
+                            <option value="0">男</option>
+                            <option value="1">女</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">出生日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="empBorth" class="layui-input" title="" lay-verify="required"
+                               placeholder="请选择日期" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="empPhone" class="layui-input" title="" lay-verify="required"
+                               placeholder="例：17611112222" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="add">添加</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#add-manager'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="edit-manager">
+    <div class="layout-background display-none" onclick="hideLayout($('#edit-manager'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">物业管理员信息</span>
+                <span class="layout-close" onclick="hideLayout($('#edit-manager'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item display-none">
+                    <label class="layui-form-label">管理员姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="empId" class="layui-input" title="" lay-verify="required"
+                               autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">管理员姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="empName" class="layui-input" title="" lay-verify="required"
+                               placeholder="例：张三" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选择框</label>
+                    <div class="layui-input-block">
+                        <select name="empGender" lay-verify="required" title="">
+                            <option value="0">男</option>
+                            <option value="1">女</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">出生日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="empBorth" class="layui-input" title="" lay-verify="required"
+                               placeholder="请选择日期">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="empPhone" class="layui-input" title="" lay-verify="required"
+                               placeholder="例：17611112222">
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="edit">添加</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#edit-manager'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/layui256/layui.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/manager.js"></script>
+</footer>
+</body>
+</html>

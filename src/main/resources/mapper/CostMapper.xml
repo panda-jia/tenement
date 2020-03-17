@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.yang.cloud.mapper.CostMapper">
+    <resultMap id="BaseResultMap" type="online.yang.cloud.model.Cost">
+        <id column="cost_id" property="costId" jdbcType="VARCHAR"/>
+        <result column="cost_type" property="costType" jdbcType="VARCHAR"/>
+        <result column="cost_start" property="costStart" jdbcType="VARCHAR"/>
+        <result column="cost_end" property="costEnd" jdbcType="VARCHAR"/>
+        <result column="cost_sum" property="costSum" jdbcType="DECIMAL"/>
+        <result column="cost_owner" property="costOwner" jdbcType="VARCHAR"/>
+        <result column="cost_owner_no" property="costOwnerNo" jdbcType="VARCHAR"/>
+        <result column="cost_operator" property="costOperator" jdbcType="VARCHAR"/>
+        <result column="cost_operator_no" property="costOperatorNo" jdbcType="VARCHAR"/>
+        <result column="cost_status" property="costStatus" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        cost_id, cost_type, cost_start, cost_end, cost_sum, cost_owner, cost_owner_no, cost_operator,
+        cost_operator_no, cost_status
+    </sql>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from cost
+        <trim prefix="where" suffixOverrides="and">
+            <if test="costOwner != null">
+                cost_owner like concat('%', #{costOwner,jdbcType=VARCHAR}, '%') and
+            </if>
+        </trim>
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cost
+        <trim prefix="where" suffixOverrides="and">
+            <if test="costOwner != null">
+                cost_owner like concat('%', #{costOwner,jdbcType=VARCHAR}, '%') and
+            </if>
+        </trim>
+    </select>
+    <select id="findByTypeAndOwnerNo" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cost
+        where cost_type = #{costType,jdbcType=VARCHAR}
+        and cost_owner_no = #{costOwnerNo,jdbcType=VARCHAR}
+        and cost_status = 0
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from cost
+        where cost_id = #{costId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from cost
+        where cost_id = #{costId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="online.yang.cloud.model.Cost">
+        insert into cost (cost_id, cost_type, cost_start,
+          cost_end, cost_sum, cost_owner,
+          cost_owner_no, cost_operator, cost_operator_no,
+          cost_status)
+        values (#{costId,jdbcType=VARCHAR}, #{costType,jdbcType=VARCHAR}, #{costStart,jdbcType=VARCHAR},
+          #{costEnd,jdbcType=VARCHAR}, #{costSum,jdbcType=DECIMAL}, #{costOwner,jdbcType=VARCHAR},
+          #{costOwnerNo,jdbcType=VARCHAR}, #{costOperator,jdbcType=VARCHAR}, #{costOperatorNo,jdbcType=VARCHAR},
+          #{costStatus,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="online.yang.cloud.model.Cost">
+        insert into cost
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="costId != null">
+                cost_id,
+            </if>
+            <if test="costType != null">
+                cost_type,
+            </if>
+            <if test="costStart != null">
+                cost_start,
+            </if>
+            <if test="costEnd != null">
+                cost_end,
+            </if>
+            <if test="costSum != null">
+                cost_sum,
+            </if>
+            <if test="costOwner != null">
+                cost_owner,
+            </if>
+            <if test="costOwnerNo != null">
+                cost_owner_no,
+            </if>
+            <if test="costOperator != null">
+                cost_operator,
+            </if>
+            <if test="costOperatorNo != null">
+                cost_operator_no,
+            </if>
+            <if test="costStatus != null">
+                cost_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="costId != null">
+                #{costId,jdbcType=VARCHAR},
+            </if>
+            <if test="costType != null">
+                #{costType,jdbcType=VARCHAR},
+            </if>
+            <if test="costStart != null">
+                #{costStart,jdbcType=VARCHAR},
+            </if>
+            <if test="costEnd != null">
+                #{costEnd,jdbcType=VARCHAR},
+            </if>
+            <if test="costSum != null">
+                #{costSum,jdbcType=DECIMAL},
+            </if>
+            <if test="costOwner != null">
+                #{costOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="costOwnerNo != null">
+                #{costOwnerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="costOperator != null">
+                #{costOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="costOperatorNo != null">
+                #{costOperatorNo,jdbcType=VARCHAR},
+            </if>
+            <if test="costStatus != null">
+                #{costStatus,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.Cost">
+        update cost
+        <set>
+            <if test="costType != null">
+                cost_type = #{costType,jdbcType=VARCHAR},
+            </if>
+            <if test="costStart != null">
+                cost_start = #{costStart,jdbcType=VARCHAR},
+            </if>
+            <if test="costEnd != null">
+                cost_end = #{costEnd,jdbcType=VARCHAR},
+            </if>
+            <if test="costSum != null">
+                cost_sum = #{costSum,jdbcType=DECIMAL},
+            </if>
+            <if test="costOwner != null">
+                cost_owner = #{costOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="costOwnerNo != null">
+                cost_owner_no = #{costOwnerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="costOperator != null">
+                cost_operator = #{costOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="costOperatorNo != null">
+                cost_operator_no = #{costOperatorNo,jdbcType=VARCHAR},
+            </if>
+            <if test="costStatus != null">
+                cost_status = #{costStatus,jdbcType=INTEGER},
+            </if>
+        </set>
+        where cost_id = #{costId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.Cost">
+        update cost
+        set cost_type = #{costType,jdbcType=VARCHAR},
+          cost_start = #{costStart,jdbcType=VARCHAR},
+          cost_end = #{costEnd,jdbcType=VARCHAR},
+          cost_sum = #{costSum,jdbcType=DECIMAL},
+          cost_owner = #{costOwner,jdbcType=VARCHAR},
+          cost_owner_no = #{costOwnerNo,jdbcType=VARCHAR},
+          cost_operator = #{costOperator,jdbcType=VARCHAR},
+          cost_operator_no = #{costOperatorNo,jdbcType=VARCHAR},
+          cost_status = #{costStatus,jdbcType=INTEGER}
+        where cost_id = #{costId,jdbcType=VARCHAR}
+    </update>
+</mapper>

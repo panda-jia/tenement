@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>物业管理系统 - 房产管理</title>
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/layui256/css/layui.css">
+</head>
+<body class="layui-layout-body" onload="loadHouse()">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header"></div>
+
+    <div class="layui-side layui-bg-black"></div>
+
+    <div class="layui-body">
+        <div class="body-title">楼宇管理</div>
+        <div class="body-container">
+            <table class="layui-hide" id="house" lay-filter="house"></table>
+            <script type="text/html" id="house-toolbar">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-event="add">添加</button>
+                <input type="text" name="buildName" class="layui-input" placeholder="房号" title="">
+                <button class="layui-btn layui-btn-radius" lay-event="search">搜索</button>
+            </script>
+            <script type="text/html" id="house-tool">
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                <a class="layui-btn layui-btn-xs" lay-event="bind">绑定业主</a>
+                <a class="layui-btn layui-btn-xs" lay-event="unbind">解除绑定</a>
+            </script>
+            <div id="house-page"></div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        © 物业管理系统
+    </div>
+</div>
+
+<div id="add-house">
+    <div class="layout-background display-none" onclick="hideLayout($('#add-house'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">房号信息录入</span>
+                <span class="layout-close" onclick="hideLayout($('#add-house'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">楼栋号</label>
+                    <div class="layui-input-block">
+                        <select name="houseBuilding" title=""></select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单元号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="houseUnit" class="layui-input" title="" placeholder="单元号"
+                               required>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房间号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="houseNo" class="layui-input" title="" placeholder="房间号"
+                               required>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房产类型</label>
+                    <div class="layui-input-block">
+                        <select name="houseType" title="">
+                            <option value="0">小户型</option>
+                            <option value="1">大户型</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房产面积</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="houseArea" class="layui-input" title="" placeholder="房产面积"
+                               required>
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="add">录入</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#add-house'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="binding-owner">
+    <div class="layout-background display-none" onclick="hideLayout($('#binding-owner'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">绑定业主</span>
+                <span class="layout-close">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item display-none">
+                    <label class="layui-form-label">id</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="houseId" class="layui-input" title="" readonly="readonly"
+                               lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">业主</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="houseOwnerNo" class="layui-input" title="" lay-verify="required"
+                               placeholder="请填入业主身份证号">
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="bind">绑定</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#binding-owner'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/layui256/layui.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/house.js"></script>
+</footer>
+</body>
+</html>

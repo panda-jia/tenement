@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.yang.cloud.mapper.HouseMapper">
+    <resultMap id="BaseResultMap" type="online.yang.cloud.model.House">
+        <id column="house_id" property="houseId" jdbcType="VARCHAR"/>
+        <result column="house_no" property="houseNo" jdbcType="VARCHAR"/>
+        <result column="house_unit" property="houseUnit" jdbcType="VARCHAR"/>
+        <result column="house_type" property="houseType" jdbcType="VARCHAR"/>
+        <result column="house_area" property="houseArea" jdbcType="DECIMAL"/>
+        <result column="house_building" property="houseBuilding" jdbcType="VARCHAR"/>
+        <result column="house_date" property="houseDate" jdbcType="VARCHAR"/>
+        <result column="house_owner" property="houseOwner" jdbcType="VARCHAR"/>
+        <result column="house_owner_no" property="houseOwnerNo" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        house_id, house_no, house_unit, house_type, house_area, house_building, house_date,
+        house_owner, house_owner_no
+    </sql>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from house
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from house
+        limit #{page}, #{limit}
+    </select>
+    <select id="findByNoAndUnit" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from house
+        where house_no = #{houseNo,jdbcType=VARCHAR}
+        and house_unit = #{houseUnit,jdbcType=VARCHAR}
+        and house_building = #{houseBuilding,jdbcType=VARCHAR}
+    </select>
+    <select id="findByBuilding" parameterType="string" resultType="int">
+        select count(*)
+        from house
+        where house_building = #{houseBuilding,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from house
+        where house_id = #{houseId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from house
+    where house_id = #{houseId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="online.yang.cloud.model.House">
+    insert into house (house_id, house_no, house_unit, 
+      house_type, house_area, house_building, 
+      house_date, house_owner)
+    values (#{houseId,jdbcType=VARCHAR}, #{houseNo,jdbcType=VARCHAR}, #{houseUnit,jdbcType=INTEGER}, 
+      #{houseType,jdbcType=VARCHAR}, #{houseArea,jdbcType=DECIMAL}, #{houseBuilding,jdbcType=VARCHAR}, 
+      #{houseDate,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR}, #{houseOwnerNo,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="online.yang.cloud.model.House">
+        insert into house
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="houseId != null">
+                house_id,
+            </if>
+            <if test="houseNo != null">
+                house_no,
+            </if>
+            <if test="houseUnit != null">
+                house_unit,
+            </if>
+            <if test="houseType != null">
+                house_type,
+            </if>
+            <if test="houseArea != null">
+                house_area,
+            </if>
+            <if test="houseBuilding != null">
+                house_building,
+            </if>
+            <if test="houseDate != null">
+                house_date,
+            </if>
+            <if test="houseOwner != null">
+                house_owner,
+            </if>
+            <if test="houseOwnerNo != null">
+                house_owner_no,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="houseId != null">
+                #{houseId,jdbcType=VARCHAR},
+            </if>
+            <if test="houseNo != null">
+                #{houseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="houseUnit != null">
+                #{houseUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="houseType != null">
+                #{houseType,jdbcType=VARCHAR},
+            </if>
+            <if test="houseArea != null">
+                #{houseArea,jdbcType=DECIMAL},
+            </if>
+            <if test="houseBuilding != null">
+                #{houseBuilding,jdbcType=VARCHAR},
+            </if>
+            <if test="houseDate != null">
+                #{houseDate,jdbcType=VARCHAR},
+            </if>
+            <if test="houseOwner != null">
+                #{houseOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="houseOwnerNo != null">
+                #{houseOwnerNo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.House">
+        update house
+        <set>
+            <if test="houseNo != null">
+                house_no = #{houseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="houseUnit != null">
+                house_unit = #{houseUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="houseType != null">
+                house_type = #{houseType,jdbcType=VARCHAR},
+            </if>
+            <if test="houseArea != null">
+                house_area = #{houseArea,jdbcType=DECIMAL},
+            </if>
+            <if test="houseBuilding != null">
+                house_building = #{houseBuilding,jdbcType=VARCHAR},
+            </if>
+            <if test="houseDate != null">
+                house_date = #{houseDate,jdbcType=VARCHAR},
+            </if>
+            <if test="houseOwner != null">
+                house_owner = #{houseOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="houseOwnerNo != null">
+                house_owner_no = #{houseOwnerNo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where house_id = #{houseId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.House">
+    update house
+    set house_no = #{houseNo,jdbcType=VARCHAR},
+      house_unit = #{houseUnit,jdbcType=VARCHAR},
+      house_type = #{houseType,jdbcType=VARCHAR},
+      house_area = #{houseArea,jdbcType=DECIMAL},
+      house_building = #{houseBuilding,jdbcType=VARCHAR},
+      house_date = #{houseDate,jdbcType=VARCHAR},
+      house_owner = #{houseOwner,jdbcType=VARCHAR}
+      house_owner_no = #{houseOwnerNo,jdbcType=VARCHAR}
+    where house_id = #{houseId,jdbcType=VARCHAR}
+  </update>
+</mapper>

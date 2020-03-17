@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>物业管理系统 - 登录</title>
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/layui256/css/layui.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+<div id="login-box">
+    <p class="login-title">物业管理系统</p>
+    <div class="login-form">
+        <form class="layui-form" action="javascript:void(0)">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="empName" required  lay-verify="required" autocomplete="off" title=""
+                           class="layui-input" placeholder="请输入用户名">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="empPwd" required  lay-verify="required" autocomplete="off" title=""
+                           class="layui-input" placeholder="请输入密码">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="login">登录</button>
+            </div>
+        </form>
+    </div>
+</div>
+<footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/layui256/layui.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/login.js"></script>
+</footer>
+</body>
+</html>

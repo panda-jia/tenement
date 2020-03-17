@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.yang.cloud.mapper.VilageMapper" >
+  <resultMap id="BaseResultMap" type="online.yang.cloud.model.Vilage" >
+    <id column="vilage_id" property="vilageId" jdbcType="VARCHAR" />
+    <result column="vilage_name" property="vilageName" jdbcType="VARCHAR" />
+    <result column="vilage_date" property="vilageDate" jdbcType="VARCHAR" />
+    <result column="vilage_area" property="vilageArea" jdbcType="DECIMAL" />
+    <result column="vilage_location" property="vilageLocation" jdbcType="VARCHAR" />
+    <result column="vilage_principal" property="vilagePrincipal" jdbcType="VARCHAR" />
+    <result column="vilage_phone" property="vilagePhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vilage_id, vilage_name, vilage_date, vilage_area, vilage_location, vilage_principal, 
+    vilage_phone
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from vilage
+    where vilage_id = #{vilageId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from vilage
+    where vilage_id = #{vilageId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="online.yang.cloud.model.Vilage" >
+    insert into vilage (vilage_id, vilage_name, vilage_date, 
+      vilage_area, vilage_location, vilage_principal, 
+      vilage_phone)
+    values (#{vilageId,jdbcType=VARCHAR}, #{vilageName,jdbcType=VARCHAR}, #{vilageDate,jdbcType=VARCHAR}, 
+      #{vilageArea,jdbcType=DECIMAL}, #{vilageLocation,jdbcType=VARCHAR}, #{vilagePrincipal,jdbcType=VARCHAR}, 
+      #{vilagePhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="online.yang.cloud.model.Vilage" >
+    insert into vilage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vilageId != null" >
+        vilage_id,
+      </if>
+      <if test="vilageName != null" >
+        vilage_name,
+      </if>
+      <if test="vilageDate != null" >
+        vilage_date,
+      </if>
+      <if test="vilageArea != null" >
+        vilage_area,
+      </if>
+      <if test="vilageLocation != null" >
+        vilage_location,
+      </if>
+      <if test="vilagePrincipal != null" >
+        vilage_principal,
+      </if>
+      <if test="vilagePhone != null" >
+        vilage_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vilageId != null" >
+        #{vilageId,jdbcType=VARCHAR},
+      </if>
+      <if test="vilageName != null" >
+        #{vilageName,jdbcType=VARCHAR},
+      </if>
+      <if test="vilageDate != null" >
+        #{vilageDate,jdbcType=VARCHAR},
+      </if>
+      <if test="vilageArea != null" >
+        #{vilageArea,jdbcType=DECIMAL},
+      </if>
+      <if test="vilageLocation != null" >
+        #{vilageLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="vilagePrincipal != null" >
+        #{vilagePrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="vilagePhone != null" >
+        #{vilagePhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.Vilage" >
+    update vilage
+    <set >
+      <if test="vilageName != null" >
+        vilage_name = #{vilageName,jdbcType=VARCHAR},
+      </if>
+      <if test="vilageDate != null" >
+        vilage_date = #{vilageDate,jdbcType=VARCHAR},
+      </if>
+      <if test="vilageArea != null" >
+        vilage_area = #{vilageArea,jdbcType=DECIMAL},
+      </if>
+      <if test="vilageLocation != null" >
+        vilage_location = #{vilageLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="vilagePrincipal != null" >
+        vilage_principal = #{vilagePrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="vilagePhone != null" >
+        vilage_phone = #{vilagePhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vilage_id = #{vilageId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.Vilage" >
+    update vilage
+    set vilage_name = #{vilageName,jdbcType=VARCHAR},
+      vilage_date = #{vilageDate,jdbcType=VARCHAR},
+      vilage_area = #{vilageArea,jdbcType=DECIMAL},
+      vilage_location = #{vilageLocation,jdbcType=VARCHAR},
+      vilage_principal = #{vilagePrincipal,jdbcType=VARCHAR},
+      vilage_phone = #{vilagePhone,jdbcType=VARCHAR}
+    where vilage_id = #{vilageId,jdbcType=VARCHAR}
+  </update>
+</mapper>

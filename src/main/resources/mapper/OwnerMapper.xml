@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.yang.cloud.mapper.OwnerMapper">
+    <resultMap id="BaseResultMap" type="online.yang.cloud.model.Owner">
+        <id column="owner_id" property="ownerId" jdbcType="VARCHAR"/>
+        <result column="owner_no" property="ownerNo" jdbcType="VARCHAR"/>
+        <result column="owner_name" property="ownerName" jdbcType="VARCHAR"/>
+        <result column="owner_gender" property="ownerGender" jdbcType="INTEGER"/>
+        <result column="owner_borth" property="ownerBorth" jdbcType="VARCHAR"/>
+        <result column="owner_workstation" property="ownerWorkstation" jdbcType="VARCHAR"/>
+        <result column="owner_phone" property="ownerPhone" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        owner_id, owner_no, owner_name, owner_gender, owner_borth, owner_workstation, owner_phone
+    </sql>
+    <select id="selectByOwnerNo" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from owner
+        where owner_no = #{ownerNo,jdbcType=VARCHAR}
+    </select>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from owner
+        <trim prefix="where" suffixOverrides="and">
+            <if test="ownerNo != null">owner_no like concat('%', #{ownerNo}, '%') and</if>
+            <if test="ownerName != null">owner_name like concat('%', #{ownerName}, '%') and</if>
+        </trim>
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from owner
+        <trim prefix="where" suffixOverrides="and">
+            <if test="ownerNo != null">owner_no like concat('%', #{ownerNo}, '%') and</if>
+            <if test="ownerName != null">owner_name like concat('%', #{ownerName}, '%') and</if>
+        </trim>
+        limit #{page}, #{limit}
+    </select>
+    <select id="getCountByGender" resultType="int">
+        select count(*)
+        from owner
+        where owner_gender = #{ownerGender,jdbcType=INTEGER}
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from owner
+        where owner_id = #{ownerId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+      delete from owner
+      where owner_id = #{ownerId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="online.yang.cloud.model.Owner">
+      insert into owner (owner_id, owner_no, owner_name,
+        owner_gender, owner_borth, owner_workstation,
+        owner_phone)
+      values (#{ownerId,jdbcType=VARCHAR}, #{ownerNo,jdbcType=VARCHAR}, #{ownerName,jdbcType=VARCHAR},
+        #{ownerGender,jdbcType=INTEGER}, #{ownerBorth,jdbcType=VARCHAR}, #{ownerWorkstation,jdbcType=VARCHAR},
+        #{ownerPhone,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="online.yang.cloud.model.Owner">
+        insert into owner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ownerId != null">
+                owner_id,
+            </if>
+            <if test="ownerNo != null">
+                owner_no,
+            </if>
+            <if test="ownerName != null">
+                owner_name,
+            </if>
+            <if test="ownerGender != null">
+                owner_gender,
+            </if>
+            <if test="ownerBorth != null">
+                owner_borth,
+            </if>
+            <if test="ownerWorkstation != null">
+                owner_workstation,
+            </if>
+            <if test="ownerPhone != null">
+                owner_phone,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ownerId != null">
+                #{ownerId,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerNo != null">
+                #{ownerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerName != null">
+                #{ownerName,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerGender != null">
+                #{ownerGender,jdbcType=INTEGER},
+            </if>
+            <if test="ownerBorth != null">
+                #{ownerBorth,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerWorkstation != null">
+                #{ownerWorkstation,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerPhone != null">
+                #{ownerPhone,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.Owner">
+        update owner
+        <set>
+            <if test="ownerNo != null">
+                owner_no = #{ownerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerName != null">
+                owner_name = #{ownerName,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerGender != null">
+                owner_gender = #{ownerGender,jdbcType=INTEGER},
+            </if>
+            <if test="ownerBorth != null">
+                owner_borth = #{ownerBorth,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerWorkstation != null">
+                owner_workstation = #{ownerWorkstation,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerPhone != null">
+                owner_phone = #{ownerPhone,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where owner_id = #{ownerId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.Owner">
+        update owner
+        set owner_no = #{ownerNo,jdbcType=VARCHAR},
+          owner_name = #{ownerName,jdbcType=VARCHAR},
+          owner_gender = #{ownerGender,jdbcType=INTEGER},
+          owner_borth = #{ownerBorth,jdbcType=VARCHAR},
+          owner_workstation = #{ownerWorkstation,jdbcType=VARCHAR},
+          owner_phone = #{ownerPhone,jdbcType=VARCHAR}
+        where owner_id = #{ownerId,jdbcType=VARCHAR}
+    </update>
+</mapper>

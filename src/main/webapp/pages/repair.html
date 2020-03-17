@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>物业管理系统 - 保修管理</title>
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/layui256/css/layui.css">
+</head>
+<body class="layui-layout-body" onload="loadRepair()">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header"></div>
+
+    <div class="layui-side layui-bg-black"></div>
+
+    <div class="layui-body">
+        <div class="body-title">报修信息管理</div>
+        <div class="body-container">
+            <table class="layui-hide" id="repair" lay-filter="repair"></table>
+            <script type="text/html" id="repair-toolbar">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-event="add">添加</button>
+                <!-- <input type="text" name="costOwner" class="layui-input" placeholder="业主姓名" title="">-->
+                <!-- <button class="layui-btn layui-btn-radius" lay-event="search">搜索</button>-->
+            </script>
+            <script type="text/html" id="repair-tool">
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="finish">状态改为已修复</a>
+                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="clear">业主确认</a>
+            </script>
+            <div id="repair-page"></div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        © 物业管理系统
+    </div>
+</div>
+
+<div id="add-repair">
+    <div class="layout-background display-none" onclick="hideLayout($('#add-repair'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">添加报修信息</span>
+                <span class="layout-close" onclick="hideLayout($('#add-repair'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报修房号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="repairHouse" class="layui-input" title="" lay-verify="required"
+                               placeholder="例：1-1-101">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报修内容</label>
+                    <div class="layui-input-block">
+                        <textarea name="repairContent" class="layui-textarea" title="" style="resize: none"
+                                  placeholder="请填写报修内容：" lay-verify="required"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item display-none">
+                    <label class="layui-form-label">物业管理员编号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="repairOperatorNo" class="layui-input" title="" lay-verify="required"
+                               readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">经手人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="repairOperator" class="layui-input" title="" lay-verify="required"
+                               readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea name="repairComment" class="layui-textarea" title="" style="resize: none"
+                                  placeholder="若无，则不用填!"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="add">添加</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#add-repair'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/layui256/layui.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/repair.js"></script>
+</footer>
+</body>
+</html>

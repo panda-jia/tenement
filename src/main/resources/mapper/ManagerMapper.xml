@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.yang.cloud.mapper.ManagerMapper">
+    <resultMap id="BaseResultMap" type="online.yang.cloud.model.Manager">
+        <id column="emp_id" property="empId" jdbcType="VARCHAR"/>
+        <result column="emp_name" property="empName" jdbcType="VARCHAR"/>
+        <result column="emp_pwd" property="empPwd" jdbcType="VARCHAR"/>
+        <result column="emp_gender" property="empGender" jdbcType="INTEGER"/>
+        <result column="emp_borth" property="empBorth" jdbcType="VARCHAR"/>
+        <result column="emp_phone" property="empPhone" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        emp_id, emp_name, emp_pwd, emp_gender, emp_borth, emp_phone
+    </sql>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from manager
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from manager
+        limit #{page}, #{limit}
+    </select>
+    <select id="selectByManagerName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from manager
+        where emp_name = #{empName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from manager
+        <trim prefix="where" suffixOverrides="and">
+            <if test="empId != null">
+                emp_id = #{empId,jdbcType=VARCHAR} and
+            </if>
+            <if test="empName != null">
+                emp_name = #{empName,jdbcType=VARCHAR} and
+            </if>
+            <if test="empPwd != null">
+                emp_pwd = #{empPwd,jdbcType=VARCHAR} and
+            </if>
+            <if test="empGender != null">
+                emp_gender = #{empGender,jdbcType=INTEGER} and
+            </if>
+            <if test="empBorth != null">
+                emp_borth = #{empBorth,jdbcType=VARCHAR} and
+            </if>
+            <if test="empPhone != null">
+                emp_phone = #{empPhone,jdbcType=VARCHAR} and
+            </if>
+        </trim>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from manager
+        where emp_id = #{empId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from manager
+        where emp_id = #{empId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="online.yang.cloud.model.Manager">
+        insert into manager (emp_id, emp_name, emp_pwd, emp_gender,
+          emp_borth, emp_phone)
+        values (#{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, #{empPwd,jdbcType=VARCHAR},
+        #{empGender,jdbcType=INTEGER}, #{empBorth,jdbcType=VARCHAR}, #{empPhone,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="online.yang.cloud.model.Manager">
+        insert into manager
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="empId != null">
+                emp_id,
+            </if>
+            <if test="empName != null">
+                emp_name,
+            </if>
+            <if test="empPwd != null">
+                emp_pwd,
+            </if>
+            <if test="empGender != null">
+                emp_gender,
+            </if>
+            <if test="empBorth != null">
+                emp_borth,
+            </if>
+            <if test="empPhone != null">
+                emp_phone,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="empId != null">
+                #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="empName != null">
+                #{empName,jdbcType=VARCHAR},
+            </if>
+            <if test="empPwd != null">
+                #{empPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="empGender != null">
+                #{empGender,jdbcType=INTEGER},
+            </if>
+            <if test="empBorth != null">
+                #{empBorth,jdbcType=VARCHAR},
+            </if>
+            <if test="empPhone != null">
+                #{empPhone,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.Manager">
+        update manager
+        <set>
+            <if test="empName != null">
+                emp_name = #{empName,jdbcType=VARCHAR},
+            </if>
+            <if test="empPwd != null">
+                emp_pwd = #{empPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="empGender != null">
+                emp_gender = #{empGender,jdbcType=INTEGER},
+            </if>
+            <if test="empBorth != null">
+                emp_borth = #{empBorth,jdbcType=VARCHAR},
+            </if>
+            <if test="empPhone != null">
+                emp_phone = #{empPhone,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where emp_id = #{empId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.Manager">
+        update manager
+        set emp_name = #{empName,jdbcType=VARCHAR},
+            emp_pwd = #{empPwd,jdbcType=VARCHAR},
+            emp_gender = #{empGender,jdbcType=INTEGER},
+            emp_borth = #{empBorth,jdbcType=VARCHAR},
+            emp_phone = #{empPhone,jdbcType=VARCHAR}
+        where emp_id = #{empId,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>物业管理系统</title>
+    <link rel="stylesheet" href="/layui256/css/layui.css">
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body class="layui-layout-body" onload="load()">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header"></div>
+
+    <div class="layui-side layui-bg-black"></div>
+
+    <div class="layui-body">
+        <div class="body-left">
+            <div id="notice">
+                <p class="notice-title">系统最新公告</p>
+                <p class="notice-other">
+                    其他公告请到
+                    <a href="javascript:void(0)" onclick="urlArray.notice()">公告面板</a>
+                    查看
+                </p>
+                <p class="notice-content">公告内容</p>
+            </div>
+            <div id="other-item">
+                <p class="item-title">其他模块</p>
+                <div class="item-container">
+                    <p class="item-in" onclick="urlArray.building()">
+                        <img src="/img/building.png" alt="楼宇信息管理">
+                        楼宇信息管理
+                    </p>
+                    <p class="item-in" onclick="urlArray.house()">
+                        <img src="/img/house.png" alt="房产信息管理">
+                        房产信息管理
+                    </p>
+                    <p class="item-in" onclick="urlArray.cost()">
+                        <img src="/img/cost.png" alt="费用信息管理">
+                        费用信息管理
+                    </p>
+                    <p class="item-in" onclick="urlArray.repair()">
+                        <img src="/img/repair.png" alt="报修信息管理">
+                        报修信息管理
+                    </p>
+                    <p class="item-in" onclick="urlArray.complain()">
+                        <img src="/img/complain.png" alt="投诉信息管理">
+                        投诉信息管理
+                    </p>
+                    <p class="item-in" onclick="urlArray.parking()">
+                        <img src="/img/parking.png" alt="车位信息管理">
+                        车位信息管理
+                    </p>
+                    <p class="layui-clear"></p>
+                </div>
+            </div>
+        </div>
+        <div class="body-right">
+            <div id="complain">
+                <p class="complain-title">系统最近投诉信息</p>
+                <p class="complain-other">
+                    其他投诉信息请到
+                    <a href="javascript:void(0)" onclick="urlArray.complain()">投诉信息面板</a>
+                    查看
+                </p>
+                <div class="complain-content"></div>
+            </div>
+            <div id="owner">
+                <div id="owner-echarts"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        © 物业管理系统
+    </div>
+</div>
+<footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/layui256/layui.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/index.js"></script>
+</footer>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.yang.cloud.mapper.RepairMapper" >
+    <resultMap id="BaseResultMap" type="online.yang.cloud.model.Repair" >
+        <id column="repair_id" property="repairId" jdbcType="VARCHAR" />
+        <result column="repair_house" property="repairHouse" jdbcType="VARCHAR" />
+        <result column="repair_content" property="repairContent" jdbcType="VARCHAR" />
+        <result column="repair_date" property="repairDate" jdbcType="TIMESTAMP" />
+        <result column="repair_operator" property="repairOperator" jdbcType="VARCHAR" />
+        <result column="repair_operator_no" property="repairOperatorNo" jdbcType="VARCHAR" />
+        <result column="repair_status" property="repairStatus" jdbcType="INTEGER" />
+        <result column="repair_owner_status" property="repairOwnerStatus" jdbcType="INTEGER" />
+        <result column="repair_comment" property="repairComment" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        repair_id, repair_house, repair_content, repair_date, repair_operator, repair_operator_no,
+        repair_status, repair_owner_status, repair_comment
+    </sql>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from repair
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from repair
+        limit #{page}, #{limit}
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from repair
+        where repair_id = #{repairId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from repair
+        where repair_id = #{repairId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="online.yang.cloud.model.Repair" >
+        insert into repair (repair_id, repair_house, repair_content,
+          repair_date, repair_operator, repair_operator_no,
+          repair_status, repair_owner_status, repair_comment
+          )
+        values (#{repairId,jdbcType=VARCHAR}, #{repairHouse,jdbcType=VARCHAR}, #{repairContent,jdbcType=VARCHAR},
+          #{repairDate,jdbcType=TIMESTAMP}, #{repairOperator,jdbcType=VARCHAR}, #{repairOperatorNo,jdbcType=VARCHAR},
+          #{repairStatus,jdbcType=INTEGER}, #{repairOwnerStatus,jdbcType=INTEGER}, #{repairComment,jdbcType=VARCHAR}
+          )
+    </insert>
+    <insert id="insertSelective" parameterType="online.yang.cloud.model.Repair" >
+        insert into repair
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="repairId != null" >
+                repair_id,
+            </if>
+            <if test="repairHouse != null" >
+                repair_house,
+            </if>
+            <if test="repairContent != null" >
+                repair_content,
+            </if>
+            <if test="repairDate != null" >
+                repair_date,
+            </if>
+            <if test="repairOperator != null" >
+                repair_operator,
+            </if>
+            <if test="repairOperatorNo != null" >
+                repair_operator_no,
+            </if>
+            <if test="repairStatus != null" >
+                repair_status,
+            </if>
+            <if test="repairOwnerStatus != null" >
+                repair_owner_status,
+            </if>
+            <if test="repairComment != null" >
+                repair_comment,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="repairId != null" >
+                #{repairId,jdbcType=VARCHAR},
+            </if>
+            <if test="repairHouse != null" >
+                #{repairHouse,jdbcType=VARCHAR},
+            </if>
+            <if test="repairContent != null" >
+                #{repairContent,jdbcType=VARCHAR},
+            </if>
+            <if test="repairDate != null" >
+                #{repairDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="repairOperator != null" >
+                #{repairOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="repairOperatorNo != null" >
+                #{repairOperatorNo,jdbcType=VARCHAR},
+            </if>
+            <if test="repairStatus != null" >
+                #{repairStatus,jdbcType=INTEGER},
+            </if>
+            <if test="repairOwnerStatus != null" >
+                #{repairOwnerStatus,jdbcType=INTEGER},
+            </if>
+            <if test="repairComment != null" >
+                #{repairComment,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.Repair" >
+        update repair
+        <set >
+            <if test="repairHouse != null" >
+                repair_house = #{repairHouse,jdbcType=VARCHAR},
+            </if>
+            <if test="repairContent != null" >
+                repair_content = #{repairContent,jdbcType=VARCHAR},
+            </if>
+            <if test="repairDate != null" >
+                repair_date = #{repairDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="repairOperator != null" >
+                repair_operator = #{repairOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="repairOperatorNo != null" >
+                repair_operator_no = #{repairOperatorNo,jdbcType=VARCHAR},
+            </if>
+            <if test="repairStatus != null" >
+                repair_status = #{repairStatus,jdbcType=INTEGER},
+            </if>
+            <if test="repairOwnerStatus != null" >
+                repair_owner_status = #{repairOwnerStatus,jdbcType=INTEGER},
+            </if>
+            <if test="repairComment != null" >
+                repair_comment = #{repairComment,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where repair_id = #{repairId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.Repair" >
+        update repair
+        set repair_house = #{repairHouse,jdbcType=VARCHAR},
+          repair_content = #{repairContent,jdbcType=VARCHAR},
+          repair_date = #{repairDate,jdbcType=TIMESTAMP},
+          repair_operator = #{repairOperator,jdbcType=VARCHAR},
+          repair_operator_no = #{repairOperatorNo,jdbcType=VARCHAR},
+          repair_status = #{repairStatus,jdbcType=INTEGER},
+          repair_owner_status = #{repairOwnerStatus,jdbcType=INTEGER},
+          repair_comment = #{repairComment,jdbcType=VARCHAR}
+        where repair_id = #{repairId,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,113 @@
+.layui-body {
+    padding: 10px;
+    background: #eeeeee;
+}
+
+.body-left {
+    width: calc(50% - 40px);
+    float: left;
+}
+
+#notice {
+    min-height: 340px;
+    background: #ffffff;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #e2e2e2;
+}
+
+.notice-title {
+    font-size: 20px;
+    line-height: 30px;
+    margin: 10px 0;
+}
+
+.notice-other {
+    margin: 12px 0;
+}
+
+.notice-other a {
+    color: #ff4081;
+}
+
+#other-item {
+    background: #ffffff;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #e2e2e2;
+    padding: 15px;
+}
+
+.item-title {
+    margin: 0 0 8px 0;
+}
+
+.item-container .item-in {
+    width: calc(32% - 10px);
+    line-height: 35px;
+    margin: 5px;
+    padding: 0 5px;
+    float: left;
+    cursor: pointer;
+    transition: background-color .5s;
+}
+.item-container .item-in:hover {
+    background: #f9f9f9;
+    transition: background-color .5s;
+}
+
+.item-container .item-in img {
+    width: 20px;
+    margin: -2px 0 0 0;
+}
+
+.body-right {
+    width: calc(50% - -20px);
+    margin: 0 0 0 10px;
+    float: left;
+}
+
+#complain {
+    padding: 15px 20px;
+    background: #ffffff;
+    min-height: 200px;
+    box-shadow: 0 0 20px #e2e2e2;
+}
+
+.complain-title {
+    font-size: 20px;
+    line-height: 30px;
+    margin: 10px 0;
+}
+
+.complain-other {
+    margin: 12px 0;
+}
+
+.complain-other a {
+    color: #ff4081;
+}
+
+.complain-content p {
+    background: #f9f9f9;
+    padding: 10px 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.complain-content p:last-child {
+    margin: 15px 0 0 0;
+}
+
+#owner {
+    margin: 10px 0 0 0;
+    padding: 15px 20px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #e2e2e2;
+}
+
+#owner-echarts {
+    height: 300px;
+}

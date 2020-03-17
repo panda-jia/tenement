@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>物业管理系统 - 公告管理</title>
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/layui256/css/layui.css">
+</head>
+<body class="layui-layout-body" onload="loadNotice()">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header"></div>
+
+    <div class="layui-side layui-bg-black"></div>
+
+    <div class="layui-body">
+        <div class="body-title">公告信息管理</div>
+        <div class="body-container">
+            <table class="layui-hide" id="notice" lay-filter="notice"></table>
+            <script type="text/html" id="notice-toolbar">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-event="add">添加</button>
+            </script>
+            <script type="text/html" id="notice-tool">
+                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+            <div id="notice-page"></div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        © 物业管理系统
+    </div>
+</div>
+
+<div id="add-notice">
+    <div class="layout-background display-none" onclick="hideLayout($('#add-notice'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">发布公告</span>
+                <span class="layout-close" onclick="hideLayout($('#add-notice'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">公告内容</label>
+                    <div class="layui-input-block">
+                        <textarea name="noticeContent" class="layui-textarea" title="" style="resize: none;"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发布人ID</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="noticeCreaterNo" class="layui-input" title="" readonly="readonly">
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="add">发布</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#add-notice'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="edit-notice">
+    <div class="layout-background display-none" onclick="hideLayout($('#edit-notice'))"></div>
+    <div class="layout-box display-none">
+        <form action="javascript:void(0)" class="layui-form">
+            <div class="layout-header">
+                <span class="layout-title">公告信息</span>
+                <span class="layout-close" onclick="hideLayout($('#edit-notice'))">+</span>
+            </div>
+            <div class="layout-container">
+                <div class="layui-form-item display-none">
+                    <label class="layui-form-label"></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="noticeId" class="layui-input" title="">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">公告内容</label>
+                    <div class="layui-input-block">
+                        <textarea name="noticeContent" class="layui-textarea" title="" style="resize: none;"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layout-footer">
+                <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="edit">修改</button>
+                <button class="layui-btn layui-btn-radius" onclick="hideLayout($('#edit-notice'))">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/layui256/layui.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/notice.js"></script>
+</footer>
+</body>
+</html>

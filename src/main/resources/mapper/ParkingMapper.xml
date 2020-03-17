@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.yang.cloud.mapper.ParkingMapper">
+    <resultMap id="BaseResultMap" type="online.yang.cloud.model.Parking">
+        <id column="park_id" property="parkId" jdbcType="VARCHAR"/>
+        <result column="park_no" property="parkNo" jdbcType="INTEGER"/>
+        <result column="park_car_no" property="parkCarNo" jdbcType="VARCHAR"/>
+        <result column="park_owner" property="parkOwner" jdbcType="VARCHAR"/>
+        <result column="park_operator" property="parkOperator" jdbcType="VARCHAR"/>
+        <result column="park_comment" property="parkComment" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        park_id, park_no, park_car_no, owner_name as 'park_owner', emp_name as 'park_operator', park_comment
+    </sql>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from parking
+        <if test="parkOwner != null">
+            where owner_name like concat('%', #{parkOwner}, '%')
+        </if>
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from parking, owner, manager
+        where parking.park_owner = owner.owner_no
+        and parking.park_operator = manager.emp_id
+        <if test="parkOwner != null">
+            and owner_name like concat('%', #{parkOwner}, '%')
+        </if>
+        limit #{page}, #{limit}
+    </select>
+    <select id="selectByCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from parking, owner, manager
+        where parking.park_owner = owner.owner_no
+        and parking.park_operator = manager.emp_id
+        <trim prefixOverrides="and">
+            <if test="parkNo != null">
+                and park_no = #{parkNo}
+            </if>
+            <if test="parkCarNo != null">
+                and park_car_no = #{parkCarNo}
+            </if>
+        </trim>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from parking, owner, manager
+        where parking.park_owner = owner.owner_no
+        and parking.park_operator = manager.emp_id
+        and park_id = #{parkId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from parking
+        where park_id = #{parkId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="online.yang.cloud.model.Parking">
+        insert into parking (park_id, park_no, park_car_no,
+          park_owner, park_operator, park_comment
+          )
+        values (#{parkId,jdbcType=VARCHAR}, #{parkNo,jdbcType=INTEGER}, #{parkCarNo,jdbcType=VARCHAR},
+          #{parkOwner,jdbcType=VARCHAR}, #{parkOperator,jdbcType=VARCHAR}, #{parkComment,jdbcType=VARCHAR}
+          )
+    </insert>
+    <insert id="insertSelective" parameterType="online.yang.cloud.model.Parking">
+        insert into parking
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parkId != null">
+                park_id,
+            </if>
+            <if test="parkNo != null">
+                park_no,
+            </if>
+            <if test="parkCarNo != null">
+                park_car_no,
+            </if>
+            <if test="parkOwner != null">
+                park_owner,
+            </if>
+            <if test="parkOperator != null">
+                park_operator,
+            </if>
+            <if test="parkComment != null">
+                park_comment,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parkId != null">
+                #{parkId,jdbcType=VARCHAR},
+            </if>
+            <if test="parkNo != null">
+                #{parkNo,jdbcType=INTEGER},
+            </if>
+            <if test="parkCarNo != null">
+                #{parkCarNo,jdbcType=VARCHAR},
+            </if>
+            <if test="parkOwner != null">
+                #{parkOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="parkOperator != null">
+                #{parkOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="parkComment != null">
+                #{parkComment,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="online.yang.cloud.model.Parking">
+        update parking
+        <set>
+            <if test="parkNo != null">
+                park_no = #{parkNo,jdbcType=INTEGER},
+            </if>
+            <if test="parkCarNo != null">
+                park_car_no = #{parkCarNo,jdbcType=VARCHAR},
+            </if>
+            <if test="parkOwner != null">
+                park_owner = #{parkOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="parkOperator != null">
+                park_operator = #{parkOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="parkComment != null">
+                park_comment = #{parkComment,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where park_id = #{parkId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.yang.cloud.model.Parking">
+        update parking
+        set park_no = #{parkNo,jdbcType=INTEGER},
+          park_car_no = #{parkCarNo,jdbcType=VARCHAR},
+          park_owner = #{parkOwner,jdbcType=VARCHAR},
+          park_operator = #{parkOperator,jdbcType=VARCHAR},
+          park_comment = #{parkComment,jdbcType=VARCHAR}
+        where park_id = #{parkId,jdbcType=VARCHAR}
+    </update>
+</mapper>

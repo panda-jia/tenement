@@ -1,0 +1,31 @@
+#header {
+    height: 300px;
+    background: linear-gradient(to right, #36b1da 0%, #29c6cd 100%);
+}
+
+.container {
+    height: 500px;
+    margin: -150px auto 0;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #c7c7c7;
+}
+
+.layui-form {
+    width: 350px;
+    margin: 0 auto;
+    padding: 50px 0 0 0;
+}
+
+.layui-form-label {
+    width: auto;
+    text-align: left;
+}
+
+.layui-input-block {
+    margin: 0;
+}
+
+.layui-input {
+    border-radius: 19px;
+}
