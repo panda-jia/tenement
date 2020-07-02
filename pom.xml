@@ -18,7 +18,7 @@
         <spring.version>4.3.7.RELEASE</spring.version>
         <mybatis.version>3.4.1</mybatis.version>
         <mybatis.spring.version>1.3.0</mybatis.spring.version>
-        <mysql.derver.version>5.1.47</mysql.derver.version>
+        <mysql.derver.version>8.0.16</mysql.derver.version>
     </properties>
 
     <dependencies>
